@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "59173229593",
+    "project_id": "football-hub-8103f",
+    "storage_bucket": "football-hub-8103f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59173229593:android:f27ae150be32f22b770688",
+        "android_client_info": {
+          "package_name": "com.gligamihai.footballhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59173229593-h4jgcoebmhgs535qofmi69750c0ffl67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcn3Ede49DBgE1OJjUxGPU-rPXql-_y3I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59173229593-h4jgcoebmhgs535qofmi69750c0ffl67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
