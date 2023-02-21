@@ -25,6 +25,7 @@ import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,14 +54,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void loginUser(String email, String password){
+    public void loginUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             if (mAuth.getCurrentUser().isEmailVerified()) {
-                                Toast.makeText(LoginActivity.this,"Authentication succesfully",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Authentication succesfully", Toast.LENGTH_SHORT).show();
+                                goToMainActivity();
                             } else {
                                 Toast.makeText(LoginActivity.this, "Please verify your email address", Toast.LENGTH_SHORT).show();
                             }
@@ -114,19 +116,19 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private boolean checkNetworkConnection()
-    {
+    private boolean checkNetworkConnection() {
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if(networkInfo != null)
-        {
+        if (networkInfo != null) {
             return true;
-        }
-        else
-        {
+        } else {
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
             return false;
         }
+    }
+
+    private void goToMainActivity() {
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
     }
 }
