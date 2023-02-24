@@ -84,10 +84,17 @@ public class User {
         this.experienceLevel = experienceLevel;
     }
 
-    public User(String name, String email, String password, String phoneNumber) {
+    public User(){}
+    public User(String name, String email, String password, String phoneNumber, int height, float weight, String preferredFoot, String playingPosition, String experienceLevel) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.height = height;
+        this.weight = weight;
+        this.preferredFoot = preferredFoot;
+        this.playingPosition = playingPosition;
+        this.experienceLevel = experienceLevel;
     }
+
 }
