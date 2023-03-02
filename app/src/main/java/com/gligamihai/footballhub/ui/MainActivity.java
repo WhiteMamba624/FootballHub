@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gligamihai.footballhub.R;
+import com.gligamihai.footballhub.Utils.Main;
 import com.gligamihai.footballhub.models.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -87,4 +88,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this,ProfileActivity.class));
     }
 
+    public void clickWeather(View view){
+        startActivity(new Intent(MainActivity.this,WeatherActivity.class));
+    }
+
+    public void clickPlaces(View view){
+        startActivity(new Intent(MainActivity.this,PlacesActivity.class));
+    }
 }
