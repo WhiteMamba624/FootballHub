@@ -37,10 +37,15 @@ public class RegisterActivity extends AppCompatActivity {
         EditText password = findViewById(R.id.editTextPassword);
         EditText name = findViewById(R.id.editTextName);
         EditText phoneNumber = findViewById(R.id.editTextMobile);
+        EditText experienceLevel= findViewById(R.id.editTextExperienceLevel);
+        EditText height=findViewById(R.id.editTextHeight);
+        EditText playingPosition=findViewById(R.id.editTextPlayingPosition);
+        EditText preferredFoot=findViewById(R.id.editTextPreferredFoot);
+        EditText weight=findViewById(R.id.editTextWeight);
         Button registerButton = findViewById(R.id.registerButton);
 
         registerButton.setOnClickListener(v -> {
-            User user = new User(name.getText().toString().trim(), email.getText().toString().trim(), password.getText().toString().trim(), phoneNumber.getText().toString().trim());
+            User user = new User(name.getText().toString().trim(), email.getText().toString().trim(), password.getText().toString().trim(), phoneNumber.getText().toString().trim(),Integer.parseInt(height.getText().toString().trim()),Float.parseFloat(weight.getText().toString().trim()),preferredFoot.getText().toString().trim(),playingPosition.getText().toString().trim(),experienceLevel.getText().toString().trim());
             if (isValidEmail(user.getEmail()) && isValidPassword(user.getPassword()) && !user.getName().isEmpty() && !user.getPhoneNumber().isEmpty()) {
                 registerUser(user);
             } else if (user.getEmail().isEmpty() || user.getPassword().isEmpty() || user.getName().isEmpty() || user.getPhoneNumber().isEmpty()) {

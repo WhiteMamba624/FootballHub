@@ -4,20 +4,30 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gligamihai.footballhub.R;
+import com.gligamihai.footballhub.models.User;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     TextView currentUserEmail;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,4 +82,9 @@ public class MainActivity extends AppCompatActivity {
         });
         alertLogout.show();
     }
+
+    public void clickProfile(View view){
+        startActivity(new Intent(MainActivity.this,ProfileActivity.class));
+    }
+
 }
