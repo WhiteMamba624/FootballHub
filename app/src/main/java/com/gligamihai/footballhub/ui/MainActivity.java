@@ -95,4 +95,8 @@ public class MainActivity extends AppCompatActivity {
     public void clickPlaces(View view){
         startActivity(new Intent(MainActivity.this,PlacesActivity.class));
     }
+
+    public void clickCaloriesCalculator(View view){
+        startActivity(new Intent(MainActivity.this,CaloriesCalculatorActivity.class));
+    }
 }

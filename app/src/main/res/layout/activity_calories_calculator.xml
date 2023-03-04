@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/register_bk_color"
+    tools:context=".ui.CaloriesCalculatorActivity">
+
+    <ImageView
+        android:id="@+id/imageViewUserMale"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/ic_user_male"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewUserFemale"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="70dp"
+        android:background="@drawable/ic_user_female"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBoxMale"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:buttonTint="@color/whiteTextColor"
+        app:layout_constraintHeight_percent="0.10"
+        app:layout_constraintStart_toStartOf="@id/imageViewUserMale"
+        app:layout_constraintTop_toBottomOf="@id/imageViewUserMale"
+        app:layout_constraintWidth_percent="0.10" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Male"
+        android:textColor="@color/whiteTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/checkBoxMale"
+        app:layout_constraintStart_toEndOf="@id/checkBoxMale"
+        app:layout_constraintTop_toBottomOf="@id/imageViewUserMale" />
+
+    <CheckBox
+        android:id="@+id/checkBoxFemale"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:buttonTint="@color/whiteTextColor"
+        app:layout_constraintHeight_percent="0.10"
+        app:layout_constraintStart_toStartOf="@id/imageViewUserFemale"
+        app:layout_constraintTop_toBottomOf="@id/imageViewUserFemale"
+        app:layout_constraintWidth_percent="0.10" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Female"
+        android:textColor="@color/whiteTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/checkBoxFemale"
+        app:layout_constraintStart_toEndOf="@id/checkBoxFemale"
+        app:layout_constraintTop_toBottomOf="@id/imageViewUserFemale" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="@color/whiteTextColor"
+        android:layout_marginTop="150dp"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:id="@+id/textInputAge"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/editTextAge"
+                    style="@style/modifiedEditText"
+                    android:hint="Age"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:id="@+id/textInputHeight"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/editTextCaloriesHeight"
+                    style="@style/modifiedEditText"
+                    android:hint="Height(cm)"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:id="@+id/textInputWeight"
+                android:layout_marginTop="20dp">
+                <EditText
+                    android:id="@+id/editTextCaloriesWeight"
+                    style="@style/modifiedEditText"
+                    android:hint="Weight(kg)"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinnerActivityType"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@android:drawable/editbox_background" />
+
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                android:id="@+id/calculateCaloriesButton"
+                style="@style/loginButton"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                android:text="Calculate"
+                app:initialCornerAngle="27dp"
+                app:spinning_bar_color="#FFF"
+                app:spinning_bar_padding="6dp"
+                app:spinning_bar_width="4dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:id="@+id/textCaloriesToMaintainWeight"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/editTextCaloriesToMaintainWeight"
+                    style="@style/modifiedEditText"
+                    android:hint="Calories to maintain weight"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:editable="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:id="@+id/textCaloriesToLoseWeight"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/editTextCaloriesToLoseWeight"
+                    style="@style/modifiedEditText"
+                    android:hint="Calories to lose weight"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:editable="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:id="@+id/textCaloriesToGainWeight"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/editTextCaloriesToGainWeight"
+                    style="@style/modifiedEditText"
+                    android:hint="Calories to gain weight"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:editable="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
