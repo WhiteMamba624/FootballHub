@@ -17,6 +17,7 @@ import com.gligamihai.footballhub.R;
 import com.gligamihai.footballhub.Utils.Main;
 import com.gligamihai.footballhub.models.User;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -41,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
         }
+        FloatingActionButton fab=findViewById(R.id.addEventFab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,AddEventActivity.class));
+            }
+        });
     }
 
     public void clickMenu(View view) {
