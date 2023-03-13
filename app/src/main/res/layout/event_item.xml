@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardViewEventItem"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:elevation="8dp"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+
+        <ImageView
+            android:id="@+id/imageViewEvent"
+            android:layout_width="92dp"
+            android:layout_height="92dp"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/ic_event_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewEventTitle"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Test"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/imageViewEvent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewRecommendedPlayerLevel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Test"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/ic_baseline_star_24"
+            app:layout_constraintEnd_toStartOf="@id/textViewRecommendedPlayerLevel"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewEventDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="06-03-2023"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewEvent" />
+
+        <TextView
+            android:id="@+id/textViewEventTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="22:30"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewEventDate" />
+
+        <TextView
+            android:id="@+id/textViewEventLength"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="2 hours"
+            app:layout_constraintStart_toEndOf="@id/textViewEventTime"
+            app:layout_constraintTop_toBottomOf="@id/textViewEventDate" />
+
+        <TextView
+            android:id="@+id/textViewEventLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Balon la darmanesti"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewRecommendedPlayerLevel" />
+
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/ic_baseline_location_on_24"
+            app:layout_constraintEnd_toStartOf="@id/textViewEventLocation"
+            app:layout_constraintTop_toTopOf="@id/textViewEventLocation" />
+
+        <TextView
+            android:id="@+id/textViewPlayersAndTeams"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="3 teams x 6 players"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewEventLocation" />
+
+        <TextView
+            android:id="@+id/textViewFreeSpots"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="3 free spots"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewPlayersAndTeams" />
+
+        <TextView
+            android:id="@+id/textViewEventPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="10 ron/player"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewFreeSpots" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
