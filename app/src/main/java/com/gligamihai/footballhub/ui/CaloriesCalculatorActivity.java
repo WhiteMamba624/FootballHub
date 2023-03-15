@@ -2,6 +2,7 @@ package com.gligamihai.footballhub.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -156,5 +157,10 @@ public double calculateBMR(String gender,int height,double weight,int age){
                 weightUser.setText(String.valueOf(user.getWeight()));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(CaloriesCalculatorActivity.this,MainActivity.class));
     }
 }
