@@ -122,7 +122,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-
+                String eventID=documentSnapshot.getId();
+                Intent goToJoinEventActivity=new Intent(MainActivity.this,JoinEventActivity.class);
+                goToJoinEventActivity.putExtra(INTENT_EVENT_ID,eventID);
+                startActivity(goToJoinEventActivity);
             }
         });
     }
