@@ -211,4 +211,8 @@ public class MainActivity extends AppCompatActivity {
     public void clickCaloriesCalculator(View view) {
         startActivity(new Intent(MainActivity.this, CaloriesCalculatorActivity.class));
     }
+
+    public void clickUpcomingEvents(View view){
+        startActivity(new Intent(MainActivity.this,UpcomingEventsActivity.class));
+    }
 }

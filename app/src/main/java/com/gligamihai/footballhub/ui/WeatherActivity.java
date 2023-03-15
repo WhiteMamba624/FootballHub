@@ -214,4 +214,13 @@ public class WeatherActivity extends AppCompatActivity {
     public void clickPlaces(View view) {
         startActivity(new Intent(WeatherActivity.this, PlacesActivity.class));
     }
+    public void clickUpcomingEvents(View view){
+        startActivity(new Intent(WeatherActivity.this,UpcomingEventsActivity.class));
+    }
+    public void clickCaloriesCalculator(View view) {
+        startActivity(new Intent(WeatherActivity.this, CaloriesCalculatorActivity.class));
+    }
+    public void clickProfile(View view) {
+        startActivity(new Intent(WeatherActivity.this, ProfileActivity.class));
+    }
 }
