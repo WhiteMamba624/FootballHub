@@ -255,4 +255,13 @@ public class PlacesActivity extends AppCompatActivity {
     public void onBackPressed() {
         startActivity(new Intent(PlacesActivity.this, MainActivity.class));
     }
+    public void clickUpcomingEvents(View view){
+        startActivity(new Intent(PlacesActivity.this,UpcomingEventsActivity.class));
+    }
+    public void clickCaloriesCalculator(View view) {
+        startActivity(new Intent(PlacesActivity.this, CaloriesCalculatorActivity.class));
+    }
+    public void clickProfile(View view) {
+        startActivity(new Intent(PlacesActivity.this, ProfileActivity.class));
+    }
 }

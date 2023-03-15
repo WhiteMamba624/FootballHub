@@ -36,13 +36,13 @@ import static com.gligamihai.footballhub.ui.MainActivity.INTENT_EVENT_ID;
 
 public class JoinEventActivity extends AppCompatActivity {
     public String id = null;
-    public int numberOfPlayers=0;
+    public int numberOfPlayers = 0;
     private UserAdapter userAdapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference documentRef;
     private DocumentReference playerDocumentRef;
     public User user = new User();
-    public Event event=new Event();
+    public Event event = new Event();
     Button userJoinEvent;
 
     @Override
@@ -60,8 +60,8 @@ public class JoinEventActivity extends AppCompatActivity {
             documentRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                    if(task.isSuccessful()){
-                        numberOfPlayers=task.getResult().size();
+                    if (task.isSuccessful()) {
+                        numberOfPlayers = task.getResult().size();
                         //Toast.makeText(JoinEventActivity.this, "Number of players is "+numberOfPlayers, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -80,8 +80,8 @@ public class JoinEventActivity extends AppCompatActivity {
             userJoinEvent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String buttonText=userJoinEvent.getText().toString();
-                    if(buttonText.equals("Join event") && (numberOfPlayers<=event.getNumberOfTeams()*event.getNumberOfPlayersPerTeam())) {
+                    String buttonText = userJoinEvent.getText().toString();
+                    if (buttonText.equals("Join event") && (numberOfPlayers <= event.getNumberOfTeams() * event.getNumberOfPlayersPerTeam())) {
                         db.collection("Events").document(id).collection("Players").document(FirebaseAuth.getInstance().getUid())
                                 .set(user)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -89,13 +89,16 @@ public class JoinEventActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(JoinEventActivity.this, "User joined event successfully", Toast.LENGTH_SHORT).show();
+                                            db.collection("Users").document(FirebaseAuth.getInstance().getUid()).collection("Events")
+                                                    .document(id)
+                                                    .set(event);
                                             userJoinEvent.setText("Leave event");
                                         } else {
                                             Toast.makeText(JoinEventActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
-                    }else if(buttonText.equals("Leave event")){
+                    } else if (buttonText.equals("Leave event")) {
                         AlertDialog.Builder alertLeaveEvent = new AlertDialog.Builder(JoinEventActivity.this);
                         alertLeaveEvent.setTitle("Leave event");
                         alertLeaveEvent.setMessage("Are you sure you want to leave this event?");
@@ -108,6 +111,9 @@ public class JoinEventActivity extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(Void unused) {
                                                 Toast.makeText(JoinEventActivity.this, "You have left this event successfully", Toast.LENGTH_SHORT).show();
+                                                db.collection("Users").document(FirebaseAuth.getInstance().getUid()).collection("Events")
+                                                        .document(id)
+                                                        .delete();
                                                 userJoinEvent.setText("Join event");
                                             }
                                         });
@@ -125,7 +131,6 @@ public class JoinEventActivity extends AppCompatActivity {
         }
 
     }
-
 
     public void setUpRecyclerView() {
         Query query = documentRef.orderBy("name", Query.Direction.DESCENDING);
@@ -162,19 +167,19 @@ public class JoinEventActivity extends AppCompatActivity {
         });
     }
 
-    public void getEventData(){
-        DocumentReference documentReference=db.collection("Events")
+    public void getEventData() {
+        DocumentReference documentReference = db.collection("Events")
                 .document(id);
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                event=documentSnapshot.toObject(Event.class);
+                event = documentSnapshot.toObject(Event.class);
             }
         });
     }
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(JoinEventActivity.this,MainActivity.class));
+        startActivity(new Intent(JoinEventActivity.this, MainActivity.class));
     }
 }
