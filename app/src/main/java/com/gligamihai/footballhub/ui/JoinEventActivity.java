@@ -81,7 +81,7 @@ public class JoinEventActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     String buttonText = userJoinEvent.getText().toString();
-                    if (buttonText.equals("Join event") && (numberOfPlayers <= event.getNumberOfTeams() * event.getNumberOfPlayersPerTeam())) {
+                    if (buttonText.equals("Join event") && (numberOfPlayers < event.getNumberOfTeams() * event.getNumberOfPlayersPerTeam())) {
                         db.collection("Events").document(id).collection("Players").document(FirebaseAuth.getInstance().getUid())
                                 .set(user)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -98,7 +98,10 @@ public class JoinEventActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
-                    } else if (buttonText.equals("Leave event")) {
+                    } else {
+                        Toast.makeText(JoinEventActivity.this, "This event is full", Toast.LENGTH_SHORT).show();
+                    }
+                    if (buttonText.equals("Leave event")) {
                         AlertDialog.Builder alertLeaveEvent = new AlertDialog.Builder(JoinEventActivity.this);
                         alertLeaveEvent.setTitle("Leave event");
                         alertLeaveEvent.setMessage("Are you sure you want to leave this event?");
