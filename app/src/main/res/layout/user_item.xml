@@ -46,6 +46,14 @@
             app:layout_constraintStart_toStartOf="@id/textViewUserFullName"
             android:textSize="17sp"/>
 
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_player_experience_level"
+            app:layout_constraintEnd_toStartOf="@id/textViewUserExperienceLevel"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintTop_toTopOf="@id/textViewUserExperienceLevel"
+            app:layout_constraintBottom_toBottomOf="@id/textViewUserExperienceLevel"/>
         <TextView
             android:id="@+id/textViewUserExperienceLevel"
             android:layout_width="0dp"
@@ -56,6 +64,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_player_preffered_foot"
+            app:layout_constraintEnd_toStartOf="@id/textViewUserPreferredFoot"
+            app:layout_constraintTop_toTopOf="@id/textViewUserPreferredFoot"
+            app:layout_constraintBottom_toBottomOf="@id/textViewUserPreferredFoot"
+            android:layout_marginEnd="5dp"/>
         <TextView
             android:id="@+id/textViewUserPreferredFoot"
             android:layout_width="0dp"

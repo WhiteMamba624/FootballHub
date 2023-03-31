@@ -33,7 +33,7 @@ import static com.gligamihai.footballhub.ui.MainActivity.INTENT_EVENT_ID;
 public class UpdateEventActivity extends AppCompatActivity {
     final Calendar calendar = Calendar.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    public String id=null;
+    public String id = null;
     EditText updateRecommendedPlayerExperienceLevel;
     EditText updateMatchDayTitle;
     EditText updateEventDate;
@@ -44,6 +44,7 @@ public class UpdateEventActivity extends AppCompatActivity {
     EditText updateNumberOfPlayersPerTeam;
     EditText updateEventCost;
     Button updateEventButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,21 +52,21 @@ public class UpdateEventActivity extends AppCompatActivity {
         if (getIntent() != null) {
             id = getIntent().getStringExtra(INTENT_EVENT_ID);
         }
-        updateRecommendedPlayerExperienceLevel=findViewById(R.id.editTextUpdateRecommendedPlayerLevel);
-        updateMatchDayTitle=findViewById(R.id.editTextUpdateMatchDayTitle);
-        updateEventDate=findViewById(R.id.editTextUpdateEventDate);
-        updateEventStartTime=findViewById(R.id.editTextUpdateEventTime);
-        updateEventLength=findViewById(R.id.editTextUpdateEventLength);
-        updateEventLocation=findViewById(R.id.editTextUpdateEventLocation);
-        updateNumberOfTeams=findViewById(R.id.editTextUpdateEventNumberOfTeams);
-        updateNumberOfPlayersPerTeam=findViewById(R.id.editTextUpdateEventNumberOfPlayersPerTeam);
-        updateEventCost=findViewById(R.id.editTextUpdateEventCost);
+        updateRecommendedPlayerExperienceLevel = findViewById(R.id.editTextUpdateRecommendedPlayerLevel);
+        updateMatchDayTitle = findViewById(R.id.editTextUpdateMatchDayTitle);
+        updateEventDate = findViewById(R.id.editTextUpdateEventDate);
+        updateEventStartTime = findViewById(R.id.editTextUpdateEventTime);
+        updateEventLength = findViewById(R.id.editTextUpdateEventLength);
+        updateEventLocation = findViewById(R.id.editTextUpdateEventLocation);
+        updateNumberOfTeams = findViewById(R.id.editTextUpdateEventNumberOfTeams);
+        updateNumberOfPlayersPerTeam = findViewById(R.id.editTextUpdateEventNumberOfPlayersPerTeam);
+        updateEventCost = findViewById(R.id.editTextUpdateEventCost);
         getEvent(id);
-        updateEventButton=findViewById(R.id.updateEventButton);
+        updateEventButton = findViewById(R.id.updateEventButton);
         updateEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Event event=new Event();
+                Event event = new Event();
                 event.setOwnerId(FirebaseAuth.getInstance().getUid());
                 event.setRecommendedPlayerExperienceLevel(updateRecommendedPlayerExperienceLevel.getText().toString().trim());
                 event.setMatchDayTitle(updateMatchDayTitle.getText().toString().trim());
@@ -76,7 +77,15 @@ public class UpdateEventActivity extends AppCompatActivity {
                 event.setNumberOfTeams(Integer.parseInt(updateNumberOfTeams.getText().toString().trim()));
                 event.setNumberOfPlayersPerTeam(Integer.parseInt(updateNumberOfPlayersPerTeam.getText().toString().trim()));
                 event.setEventCost(Integer.parseInt(updateEventCost.getText().toString().trim()));
-                updateEvent(event);
+                if (!event.getOwnerId().isEmpty() && !event.getRecommendedPlayerExperienceLevel().isEmpty() && !event.getMatchDayTitle().isEmpty() && !event.getEventDate().isEmpty() && !event.getEventStartTime().isEmpty() && !String.valueOf(event.getEventLength()).isEmpty() && !event.getEventLocation().isEmpty() && !String.valueOf(event.getNumberOfTeams()).isEmpty() && !String.valueOf(event.getNumberOfPlayersPerTeam()).isEmpty() && !String.valueOf(event.getEventCost()).isEmpty()) {
+                    if (event.getRecommendedPlayerExperienceLevel().equalsIgnoreCase("Beginner") || event.getRecommendedPlayerExperienceLevel().equalsIgnoreCase("Intermediate") || event.getRecommendedPlayerExperienceLevel().equalsIgnoreCase("Professional")) {
+                        updateEvent(event);
+                    } else {
+                        Toast.makeText(UpdateEventActivity.this, "Experience level can only be Beginner, Intermediate of Professional", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(UpdateEventActivity.this, "Please make sure that there are no empty fields", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -87,7 +96,7 @@ public class UpdateEventActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(UpdateEventActivity.this,MainActivity.class));
+        startActivity(new Intent(UpdateEventActivity.this, MainActivity.class));
     }
 
     public void datePicker(View view) {
@@ -123,13 +132,13 @@ public class UpdateEventActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    public void getEvent(String id){
-        DocumentReference documentReference=db.collection("Events")
+    public void getEvent(String id) {
+        DocumentReference documentReference = db.collection("Events")
                 .document(id);
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Event event=documentSnapshot.toObject(Event.class);
+                Event event = documentSnapshot.toObject(Event.class);
                 updateRecommendedPlayerExperienceLevel.setText(event.getRecommendedPlayerExperienceLevel());
                 updateMatchDayTitle.setText(event.getMatchDayTitle());
                 updateEventDate.setText(event.getEventDate());
@@ -143,17 +152,17 @@ public class UpdateEventActivity extends AppCompatActivity {
         });
     }
 
-    public void updateEvent(Event event){
+    public void updateEvent(Event event) {
         db.collection("Events")
                 .document(id)
                 .set(event)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(UpdateEventActivity.this, "Event updated successfully", Toast.LENGTH_SHORT).show();
                             onBackPressed();
-                        }else{
+                        } else {
                             Toast.makeText(UpdateEventActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }

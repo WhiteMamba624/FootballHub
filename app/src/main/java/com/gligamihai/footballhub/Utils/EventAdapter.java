@@ -29,10 +29,10 @@ public class EventAdapter extends FirestoreRecyclerAdapter<Event, EventAdapter.E
         holder.recommendedPlayerLevel.setText(event.getRecommendedPlayerExperienceLevel());
         holder.eventDate.setText(event.getEventDate());
         holder.eventTime.setText(event.getEventStartTime());
-        holder.eventLength.setText(String.valueOf(event.getEventLength()));
+        holder.eventLength.setText(String.valueOf(event.getEventLength()) +" hours");
         holder.eventLocation.setText(event.getEventLocation());
         holder.eventPlayersAndTeams.setText(String.valueOf(event.getNumberOfPlayersPerTeam())+" players x "+String.valueOf(event.getNumberOfTeams()));
-        holder.eventPrice.setText(String.valueOf(event.getEventCost()));
+        holder.eventPrice.setText(String.valueOf(event.getEventCost())+ " lei");
     }
 
     @NonNull

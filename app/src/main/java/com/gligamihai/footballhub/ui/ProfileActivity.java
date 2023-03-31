@@ -27,23 +27,24 @@ public class ProfileActivity extends AppCompatActivity {
     EditText updatePreferredFoot;
     EditText updateWeight;
     Button updateButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        updateName=findViewById(R.id.editTextInfoName);
-        updatePhoneNumber=findViewById(R.id.editTextInfoMobile);
-        updateExperienceLevel=findViewById(R.id.editTextInfoExperienceLevel);
-        updateHeight=findViewById(R.id.editTextInfoHeight);
-        updatePlayingPosition=findViewById(R.id.editTextInfoPlayingPosition);
-        updatePreferredFoot=findViewById(R.id.editTextInfoPreferredFoot);
-        updateWeight=findViewById(R.id.editTextInfoWeight);
-        updateButton=findViewById(R.id.updateButton);
+        updateName = findViewById(R.id.editTextInfoName);
+        updatePhoneNumber = findViewById(R.id.editTextInfoMobile);
+        updateExperienceLevel = findViewById(R.id.editTextInfoExperienceLevel);
+        updateHeight = findViewById(R.id.editTextInfoHeight);
+        updatePlayingPosition = findViewById(R.id.editTextInfoPlayingPosition);
+        updatePreferredFoot = findViewById(R.id.editTextInfoPreferredFoot);
+        updateWeight = findViewById(R.id.editTextInfoWeight);
+        updateButton = findViewById(R.id.updateButton);
         getUserData();
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user=new User();
+                User user = new User();
                 user.setName(updateName.getText().toString().trim());
                 user.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                 user.setPassword("");
@@ -53,27 +54,43 @@ public class ProfileActivity extends AppCompatActivity {
                 user.setPlayingPosition(updatePlayingPosition.getText().toString().trim());
                 user.setPreferredFoot(updatePreferredFoot.getText().toString().trim());
                 user.setWeight(Float.parseFloat(updateWeight.getText().toString().trim()));
-                updateUser(user);
+                if (!user.getEmail().isEmpty() && !user.getName().isEmpty() && !user.getPhoneNumber().isEmpty() && !user.getExperienceLevel().isEmpty() && !updateWeight.getText().toString().isEmpty() && !updateHeight.getText().toString().isEmpty() && !user.getPlayingPosition().isEmpty() && !user.getPreferredFoot().isEmpty()) {
+                    if (user.getPlayingPosition().equalsIgnoreCase("Striker") || user.getPlayingPosition().equalsIgnoreCase("Midfielder") || user.getPlayingPosition().equalsIgnoreCase("Defender") || user.getPlayingPosition().equalsIgnoreCase("Goalkeeper")) {
+                        if (user.getExperienceLevel().equalsIgnoreCase("Beginner") || user.getExperienceLevel().equalsIgnoreCase("Intermediate") || user.getExperienceLevel().equalsIgnoreCase("Professional")) {
+                            if (user.getPreferredFoot().equalsIgnoreCase("Left") || user.getPreferredFoot().equalsIgnoreCase("Right") || user.getPreferredFoot().equalsIgnoreCase("Both")){
+                                updateUser(user);
+                            } else {
+                                Toast.makeText(ProfileActivity.this, "Preferred foot can only be Right, Left or Both ", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(ProfileActivity.this, "Experience level can only be Beginner, Intermediate of Professional", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(ProfileActivity.this, "Playing position can only be Striker, Midfielder, Defender or Goalkeeper", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Please make sure that there are no empty fields", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
     public void goToMainActivity(View view) {
-        startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
     }
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
     }
 
-    public void getUserData(){
+    public void getUserData() {
         DocumentReference docRef = db.collection("Users")
                 .document(FirebaseAuth.getInstance().getUid());
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                User user=documentSnapshot.toObject(User.class);
+                User user = documentSnapshot.toObject(User.class);
                 updateName.setText(user.getName());
                 updatePhoneNumber.setText(user.getPhoneNumber());
                 updateExperienceLevel.setText(user.getExperienceLevel());
@@ -85,14 +102,14 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void updateUser(User user){
+    public void updateUser(User user) {
         db.collection("Users")
                 .document(FirebaseAuth.getInstance().getUid())
                 .set(user)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(ProfileActivity.this, "User successfully updated", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+                        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
                     } else {
                         Toast.makeText(ProfileActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
