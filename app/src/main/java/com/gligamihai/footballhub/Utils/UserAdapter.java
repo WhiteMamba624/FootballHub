@@ -3,6 +3,7 @@ package com.gligamihai.footballhub.Utils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,15 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
         holder.userPlayingPosition.setText(user.getPlayingPosition());
         holder.userExperienceLevel.setText(user.getExperienceLevel());
         holder.userPreferredFoot.setText(user.getPreferredFoot());
+        if(user.getPlayingPosition().equalsIgnoreCase("Striker")){
+            holder.userImage.setBackgroundResource(R.drawable.ic_player_ronaldo);
+        } else if(user.getPlayingPosition().equalsIgnoreCase("Midfielder")){
+            holder.userImage.setBackgroundResource(R.drawable.ic_player_midfielder);
+        } else if(user.getPlayingPosition().equalsIgnoreCase("Defender")){
+            holder.userImage.setBackgroundResource(R.drawable.ic_player_defender);
+        } else if(user.getPlayingPosition().equalsIgnoreCase("Goalkeeper")){
+            holder.userImage.setBackgroundResource(R.drawable.ic_player_goalkeeper);
+        }
     }
 
     @NonNull
@@ -42,6 +52,7 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
         TextView userPlayingPosition;
         TextView userExperienceLevel;
         TextView userPreferredFoot;
+        ImageView userImage;
 
         public UserHolder(View itemView){
             super(itemView);
@@ -49,6 +60,7 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
             userPlayingPosition=itemView.findViewById(R.id.textViewPlayingPosition);
             userExperienceLevel=itemView.findViewById(R.id.textViewUserExperienceLevel);
             userPreferredFoot=itemView.findViewById(R.id.textViewUserPreferredFoot);
+            userImage=itemView.findViewById(R.id.imageViewUser);
         }
     }
 

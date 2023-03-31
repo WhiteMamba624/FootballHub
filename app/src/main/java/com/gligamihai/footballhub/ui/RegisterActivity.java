@@ -37,17 +37,29 @@ public class RegisterActivity extends AppCompatActivity {
         EditText password = findViewById(R.id.editTextPassword);
         EditText name = findViewById(R.id.editTextName);
         EditText phoneNumber = findViewById(R.id.editTextMobile);
-        EditText experienceLevel= findViewById(R.id.editTextExperienceLevel);
-        EditText height=findViewById(R.id.editTextHeight);
-        EditText playingPosition=findViewById(R.id.editTextPlayingPosition);
-        EditText preferredFoot=findViewById(R.id.editTextPreferredFoot);
-        EditText weight=findViewById(R.id.editTextWeight);
+        EditText experienceLevel = findViewById(R.id.editTextExperienceLevel);
+        EditText height = findViewById(R.id.editTextHeight);
+        EditText playingPosition = findViewById(R.id.editTextPlayingPosition);
+        EditText preferredFoot = findViewById(R.id.editTextPreferredFoot);
+        EditText weight = findViewById(R.id.editTextWeight);
         Button registerButton = findViewById(R.id.registerButton);
 
         registerButton.setOnClickListener(v -> {
-            User user = new User(name.getText().toString().trim(), email.getText().toString().trim(), password.getText().toString().trim(), phoneNumber.getText().toString().trim(),Integer.parseInt(height.getText().toString().trim()),Float.parseFloat(weight.getText().toString().trim()),preferredFoot.getText().toString().trim(),playingPosition.getText().toString().trim(),experienceLevel.getText().toString().trim());
-            if (isValidEmail(user.getEmail()) && isValidPassword(user.getPassword()) && !user.getName().isEmpty() && !user.getPhoneNumber().isEmpty()) {
-                registerUser(user);
+            User user = new User(name.getText().toString().trim(), email.getText().toString().trim(), password.getText().toString().trim(), phoneNumber.getText().toString().trim(), Integer.parseInt(height.getText().toString().trim()), Float.parseFloat(weight.getText().toString().trim()), preferredFoot.getText().toString().trim(), playingPosition.getText().toString().trim(), experienceLevel.getText().toString().trim());
+            if (isValidEmail(user.getEmail()) && isValidPassword(user.getPassword()) && !user.getName().isEmpty() && !user.getPhoneNumber().isEmpty() && !user.getPlayingPosition().isEmpty() && !user.getPreferredFoot().isEmpty() && !user.getExperienceLevel().isEmpty() && !String.valueOf(user.getHeight()).isEmpty() && !String.valueOf(user.getWeight()).isEmpty()) {
+                if (user.getPlayingPosition().equalsIgnoreCase("Striker") || user.getPlayingPosition().equalsIgnoreCase("Midfielder") || user.getPlayingPosition().equalsIgnoreCase("Defender") || user.getPlayingPosition().equalsIgnoreCase("Goalkeeper")) {
+                    if (user.getExperienceLevel().equalsIgnoreCase("Beginner") || user.getExperienceLevel().equalsIgnoreCase("Intermediate") || user.getExperienceLevel().equalsIgnoreCase("Professional")) {
+                        if (user.getPreferredFoot().equalsIgnoreCase("Left") || user.getPreferredFoot().equalsIgnoreCase("Right") || user.getPreferredFoot().equalsIgnoreCase("Both")) {
+                            registerUser(user);
+                        } else {
+                            Toast.makeText(this, "Preferred foot can only be Right, Left or Both ", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(this, "Experience level can only be Beginner, Intermediate of Professional", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Playing position can only be Striker, Midfielder, Defender or Goalkeeper", Toast.LENGTH_SHORT).show();
+                }
             } else if (user.getEmail().isEmpty() || user.getPassword().isEmpty() || user.getName().isEmpty() || user.getPhoneNumber().isEmpty()) {
                 Toast.makeText(RegisterActivity.this, "Please make sure that there are no empty fields", Toast.LENGTH_SHORT).show();
             } else {

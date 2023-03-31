@@ -65,7 +65,16 @@ public class AddEventActivity extends AppCompatActivity {
                 event.setNumberOfTeams(Integer.parseInt(numberOfTeams.getText().toString().trim()));
                 event.setNumberOfPlayersPerTeam(Integer.parseInt(numberOfPlayersPerTeam.getText().toString().trim()));
                 event.setEventCost(Integer.parseInt(numberOfPlayersPerTeam.getText().toString().trim()));
-                addEvent(event);
+                if(!event.getOwnerId().isEmpty() && !event.getRecommendedPlayerExperienceLevel().isEmpty() && !event.getMatchDayTitle().isEmpty() && !event.getEventDate().isEmpty() && !event.getEventStartTime().isEmpty() && !String.valueOf(event.getEventLength()).isEmpty() && !event.getEventLocation().isEmpty() && !String.valueOf(event.getNumberOfTeams()).isEmpty() && !String.valueOf(event.getNumberOfPlayersPerTeam()).isEmpty() && !String.valueOf(event.getEventCost()).isEmpty()){
+                    if(event.getRecommendedPlayerExperienceLevel().equalsIgnoreCase("Beginner") || event.getRecommendedPlayerExperienceLevel().equalsIgnoreCase("Intermediate") || event.getRecommendedPlayerExperienceLevel().equalsIgnoreCase("Professional")){
+                        addEvent(event);
+                    } else {
+                        Toast.makeText(AddEventActivity.this, "Experience level can only be Beginner, Intermediate of Professional", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(AddEventActivity.this, "Please make sure that there are no empty fields", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
