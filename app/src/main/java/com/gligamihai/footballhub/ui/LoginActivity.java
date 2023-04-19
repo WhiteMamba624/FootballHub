@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             if (mAuth.getCurrentUser().isEmailVerified()) {
-                                Toast.makeText(LoginActivity.this, "Authentication succesfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Authentication successfully", Toast.LENGTH_SHORT).show();
                                 goToMainActivity();
                             } else {
                                 Toast.makeText(LoginActivity.this, "Please verify your email address", Toast.LENGTH_SHORT).show();

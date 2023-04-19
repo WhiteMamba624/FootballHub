@@ -98,7 +98,7 @@ public class JoinEventActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
-                    } else {
+                    } else if(buttonText.equals("Join event") && (numberOfPlayers >= event.getNumberOfTeams() * event.getNumberOfPlayersPerTeam())){
                         Toast.makeText(JoinEventActivity.this, "This event is full", Toast.LENGTH_SHORT).show();
                     }
                     if (buttonText.equals("Leave event")) {
