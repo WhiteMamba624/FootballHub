@@ -57,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if (!user.getEmail().isEmpty() && !user.getName().isEmpty() && !user.getPhoneNumber().isEmpty() && !user.getExperienceLevel().isEmpty() && !updateWeight.getText().toString().isEmpty() && !updateHeight.getText().toString().isEmpty() && !user.getPlayingPosition().isEmpty() && !user.getPreferredFoot().isEmpty()) {
                     if (user.getPlayingPosition().equalsIgnoreCase("Striker") || user.getPlayingPosition().equalsIgnoreCase("Midfielder") || user.getPlayingPosition().equalsIgnoreCase("Defender") || user.getPlayingPosition().equalsIgnoreCase("Goalkeeper")) {
                         if (user.getExperienceLevel().equalsIgnoreCase("Beginner") || user.getExperienceLevel().equalsIgnoreCase("Intermediate") || user.getExperienceLevel().equalsIgnoreCase("Professional")) {
-                            if (user.getPreferredFoot().equalsIgnoreCase("Left") || user.getPreferredFoot().equalsIgnoreCase("Right") || user.getPreferredFoot().equalsIgnoreCase("Both")){
+                            if (user.getPreferredFoot().equalsIgnoreCase("Left") || user.getPreferredFoot().equalsIgnoreCase("Right") || user.getPreferredFoot().equalsIgnoreCase("Both")) {
                                 updateUser(user);
                             } else {
                                 Toast.makeText(ProfileActivity.this, "Preferred foot can only be Right, Left or Both ", Toast.LENGTH_SHORT).show();
